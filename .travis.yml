@@ -22,15 +22,14 @@ after_success:
   - docker push crimsonknightd/multi-server
   - docker push crimsonknightd/multi-worker
 
-  deploy:
-    provider: elasticbeanstalk
-    region: "us-east-2"
-    app: "multi-docker-1"
-    env: Multidocker1-env
-    bucket_name: elasticbeanstalk-us-east-2-453576739230
-    bucket_path: docker-multi 
-    on:
-      branch: master
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "multi-docker-1"
+  env: Multidocker1-env
+  bucket_name: elasticbeanstalk-us-east-2-453576739230
+  bucket_path: docker-multi 
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
