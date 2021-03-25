@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "crimsonknightd/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        
+        {
+            "name": "server",
+            "image": "crimsonknightd/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+
+        {
+            "name": "worker",
+            "image": "crimsonknightd/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+
+        {
+            "name": "nginx",
+            "image": "crimsonknightd/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ], 
+            "links": [ "server", "client" ]
+        }
+    ]
+}
