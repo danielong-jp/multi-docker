@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class Fib {
+class Fib extends Component {
     state = {
         seenIndexes: [],
         values: {},
@@ -35,7 +35,10 @@ class Fib {
     };
 
     renderSeenIndexes() {
-        return this.state.seenIndexes.map(({ number }) => number).join(', ');
+        // this.state.seenIndexes.map(({ number }) => number).join(', ')
+        let indexes = "";
+        this.state.seenIndexes.forEach((n) => { indexes + n + ", "});
+        return indexes;
     }
 
     renderValues(){
