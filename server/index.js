@@ -24,13 +24,14 @@ pgClient.on("connect", () => {
     pgClient
       .query("CREATE TABLE IF NOT EXISTS values (number INT)")
       .catch((err) => console.log(err));
+      console.log("done");
 });
 
-pgClient.on('error', () => console.log('Lost PG connection'));
+// pgClient.on('error', () => console.log('Lost PG connection'));
  
-pgClient
-  .query('CREATE TABLE IF NOT EXISTS values (number INT)')
-  .catch(err => console.log(err));
+// pgClient
+//   .query('CREATE TABLE IF NOT EXISTS values (number INT)')
+//   .catch(err => console.log(err));
 
 // Redis client setup
 
@@ -46,16 +47,23 @@ const redisPublisher = redisClient.duplicate();
 //express route handlers
 
 app.get("/", (req, res) => {
+    pgClient
+      .query("CREATE TABLE IF NOT EXISTS values (number INT)")
+      .catch((err) => console.log(err));
+      console.log("done");
+    console.log("api");
     res.send("hi");
 });
 
 app.get("/values/all", async (req, res) => {
+    console.log("all");
     const values = await pgClient.query("SELECT * from values");
     res.send(values.rows);
 });
 
 
 app. get("/values/current", async (req, res) => {
+    console.log("current");
     redisClient.hgetall("values", (err, values) => {
         res.send(values);
     });
@@ -63,7 +71,7 @@ app. get("/values/current", async (req, res) => {
 
 app.post("/values", async (req, res) => {
     const index = req.body.index;
-
+    console.log("values")
     if (parseInt(index) > 40) {
         return res.status(422)
             .send("Index too high");
