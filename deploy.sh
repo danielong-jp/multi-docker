@@ -15,6 +15,6 @@ docker push crimsonknightd/multi-worker:$SHA
 
 # apply kubernetes
 kubectl apply -f ./k8s
-kubectl set image deplyoments/server-deployment server=crimsonknightd/multi-server:$SHA
+kubectl set image deployments/server-deployment server=crimsonknightd/multi-server:$SHA
 kubectl set image deployments/client-deployment client=crimsonknightd/multi-client:$SHA
 kubectl set image deployments/worker-deployment worker=crimsonknightd/multi-worker:$SHA
